@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,19 +53,22 @@
     
 <script type="text/javascript">
 $(function(){
-	$('#menu').tree({
-		onClick: function(node){
-			if($('#menu').tree("isLeaf",node.target)){
+	$("#menu").tree({
+		onClick:function(node){
+			if($("#menu").tree("isLeaf",node.target)){
 				var tabs = $("#tabs");
+				// 获取指定选项卡面板
 				var tab = tabs.tabs("getTab",node.text);
+				// 展示
 				if(tab){
-					tabs.tabs("select",node.text);
+					tabs.tabs("select",tab);
 				}else{
-					tabs.tabs('add',{
-					    title:node.text,
-					    href: node.attributes.url,
-					    closable:true,
-					    bodyCls:"content"
+				// 该面板不存在，添加新面板并跳转展示
+					tabs.tabs("add",{
+						title:node.text,
+						href:node.attributes.url,
+						closable:true,
+						bodyCls:"content"
 					});
 				}
 			}
