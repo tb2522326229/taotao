@@ -21,13 +21,17 @@
 </div>
 <script>
 
+	// 返回被选中的商品id
     function getSelectionsIds(){
     	var itemList = $("#itemList");
+    	// getSelections：返回所有被选中的行，当没有记录被选中的时候将返回一个空数组。
     	var sels = itemList.datagrid("getSelections");
     	var ids = [];
     	for(var i in sels){
+    	// push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
     		ids.push(sels[i].id);
     	}
+    	//join() 方法用于把数组中的所有元素放入一个字符串。元素是通过指定的分隔符进行分隔的。
     	ids = ids.join(",");
     	return ids;
     }
@@ -44,6 +48,7 @@
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
+        	//$.messager.alert("","")：显示警告窗口
         		$.messager.alert('提示','必须选择一个商品才能编辑!');
         		return ;
         	}
@@ -136,6 +141,12 @@
         		$.messager.alert('提示','未选中商品!');
         		return ;
         	}
+        	/*
+        		显示一个包含“确定”和“取消”按钮的确认消息窗口。参数：
+				title：在头部面板显示的标题文本。
+				msg：显示的消息文本。
+				fn(b): 回调函数。当用户点击“确定”按钮的时侯将传递一个true值给回调函数，否则传递一个false值。 
+        	*/
         	$.messager.confirm('确认','确定下架ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
