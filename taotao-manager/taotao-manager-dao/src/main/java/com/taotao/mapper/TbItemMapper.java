@@ -11,6 +11,13 @@ public interface TbItemMapper {
     int deleteByExample(TbItemExample example);
 
     int deleteByPrimaryKey(Long id);
+    
+    /**
+     * 批量删除
+     * @param ids 传入要删除的商品id集合
+     * @return
+     */
+    int batchDelete(@Param("ids") List<Long> ids);
 
     int insert(TbItem record);
 

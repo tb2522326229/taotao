@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 返回数据表格
+ * 返回EasyUIDataGrid数据表格需要的字段和集合
  */
 public class EasyUIDataGridResult implements Serializable{
 	private long total;
