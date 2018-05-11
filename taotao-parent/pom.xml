@@ -266,7 +266,4 @@
 		</pluginManagement>
 	</build>
 
-	<modules>
-		<module>taotao-manager</module>
-	</modules>
 </project>
