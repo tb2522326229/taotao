@@ -42,4 +42,17 @@ public class ItemController {
 		return itemService.deleteBatch(ids);
 	}
 	
+	@RequestMapping("/rest/item/update")
+	@ResponseBody
+	public TaotaoResult deleteItem(TbItem item,String desc){
+		return itemService.updateItem(item,desc);
+	}
+	
+
+	@RequestMapping("/item/query/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemById2(Long itemId){
+		return itemService.getItemById2(itemId);
+	}
+	
 }

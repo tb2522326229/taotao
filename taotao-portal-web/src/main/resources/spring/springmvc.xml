@@ -17,25 +17,14 @@
 	<mvc:annotation-driven />
 	<context:property-placeholder location="classpath:resource/resource.properties"/>
 	<!-- 添加注解扫描 -->
-	<context:component-scan base-package="com.taotao.controller" />
+	<context:component-scan base-package="com.taotao.protal.controller" />
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-	<mvc:resources location="/css/" mapping="/css/**"/>
-	<mvc:resources location="/js/" mapping="/js/**"/>
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 设定默认编码 -->
-		<property name="defaultEncoding" value="UTF-8"></property>
-		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
-		<property name="maxUploadSize" value="5242880"></property>
-	</bean>
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="taotao-manager-web"/>
-	<dubbo:registry protocol="zookeeper" address="192.168.25.132:2181"/>	
-	<dubbo:reference interface="com.taotao.service.ItemService" id="itemService" />
-	<dubbo:reference interface="com.taotao.service.ItemCatService" id="itemCatService" />
-	<dubbo:reference interface="com.taotao.service.ItemDescService" id="itemDescService" />
+	<dubbo:registry protocol="zookeeper" address="192.168.25.128:2181"/>	
+	<!-- <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" /> -->
 </beans>
