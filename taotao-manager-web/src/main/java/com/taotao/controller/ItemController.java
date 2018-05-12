@@ -39,8 +39,7 @@ public class ItemController {
 	@RequestMapping("/rest/item/delete")
 	@ResponseBody
 	public TaotaoResult deleteItem(@RequestParam("ids")List<Long> ids){
-		return itemService.batchDelete(ids);
+		return itemService.deleteBatch(ids);
 	}
-	
 	
 }

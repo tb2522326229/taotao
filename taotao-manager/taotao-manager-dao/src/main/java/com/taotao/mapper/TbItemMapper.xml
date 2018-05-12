@@ -106,7 +106,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <delete id="batchDelete" parameterType="list" >
+  <delete id="deleteBatch" parameterType="list" >
     delete from tb_item 
     where id in
     <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">

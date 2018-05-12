@@ -109,6 +109,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteBatch" parameterType="list" >
+    delete from tb_item_desc
+    where item_id in
+    <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+      	#{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbItemDesc" >
     insert into tb_item_desc (item_id, created, updated, 
       item_desc)

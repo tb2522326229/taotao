@@ -17,7 +17,7 @@ public interface TbItemMapper {
      * @param ids 传入要删除的商品id集合
      * @return
      */
-    int batchDelete(@Param("ids") List<Long> ids);
+    int deleteBatch(@Param("ids") List<Long> ids);
 
     int insert(TbItem record);
 

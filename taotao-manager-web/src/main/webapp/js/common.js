@@ -104,7 +104,8 @@ var TT = TAOTAO = {
     
     // 初始化选择类目组件
     initItemCat : function(data){
-    	$(".selectItemCat").each(function(i,e){
+    	// 给每一个类目绑定点击事件
+    	$(".selectItemCat").each(function(i,e){// 遍历所有类目，这样后台根据父id查询商品类目就不用递归操作,e就是产品类目节点
     		var _ele = $(e);
     		if(data && data.cid){
     			_ele.after("<span style='margin-left:10px;'>"+data.cid+"</span>");
