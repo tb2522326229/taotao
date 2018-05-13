@@ -99,7 +99,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		
 		// 判断被删除的父节点下是否还有子节点
 		if(getChildrenNodeList(tbContentCategory.getParentId()).size() == 1){
-			// 查询该节点下对应的父节点
+			// 查询该节点对应的父节点
 			TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(tbContentCategory.getParentId());
 			// 将没有子节点的标记为叶子结点
 			contentCategory.setIsParent(false);
@@ -120,7 +120,6 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 	 * @return
 	 */
 	private List<TbContentCategory> getChildrenNodeList(Long id){
-		// 递归查询出该节点下面所有子节点
 		TbContentCategoryExample example = new TbContentCategoryExample();
 		//设置查询条件
 		Criteria criteria = example.createCriteria();
