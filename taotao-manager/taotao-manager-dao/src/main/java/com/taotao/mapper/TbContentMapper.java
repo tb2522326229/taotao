@@ -33,4 +33,6 @@ public interface TbContentMapper {
     int updateByPrimaryKeyWithBLOBs(TbContent record);
 
     int updateByPrimaryKey(TbContent record);
+
+	void deleteBatchContent(@Param("ids")List<Long> ids);
 }

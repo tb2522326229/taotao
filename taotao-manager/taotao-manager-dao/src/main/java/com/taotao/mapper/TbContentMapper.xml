@@ -122,6 +122,13 @@
     delete from tb_content
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteBatchContent" parameterType="list">
+  	delete from tb_content 
+  	where id in
+  	<foreach collection="ids" open="(" separator="," close=")" index="index" item="item">
+  		#{item}
+  	</foreach> 
+  </delete>
   <delete id="deleteByExample" parameterType="com.taotao.pojo.TbContentExample" >
     delete from tb_content
     <if test="_parameter != null" >
