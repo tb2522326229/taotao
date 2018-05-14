@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.taotao.common.pojo.EasyUITreeNode;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.pojo.TbContentCategory;
 
 /**
  * 内容分类的操作接口
@@ -15,6 +16,13 @@ public interface ContentCategoryService {
 	 * @return
 	 */
 	public List<EasyUITreeNode> getContentCategoryList(Long parentId);
+	
+	/**
+	 * 查询该id下的节点
+	 * @param id
+	 * @return
+	 */
+	public TbContentCategory getCategoryList(Long id);
 
 	/**
 	 * 新增叶子节点并返回该节点
@@ -38,4 +46,11 @@ public interface ContentCategoryService {
 	 * @return
 	 */
 	public TaotaoResult deleteCategory(Long id);
+	
+	/**
+	 * 查询该节点下的字节点
+	 * @param id 被查询节点的id
+	 * @return
+	 */
+	public List<TbContentCategory> getChildrenNodeList(Long id);
 }

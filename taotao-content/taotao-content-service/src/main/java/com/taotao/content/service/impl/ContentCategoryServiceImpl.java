@@ -114,17 +114,19 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		return TaotaoResult.ok();
 	}
 
-	/**
-	 * 查询该节点下的字节点
-	 * @param id 被查询节点的id
-	 * @return
-	 */
-	private List<TbContentCategory> getChildrenNodeList(Long id){
+	@Override
+	public List<TbContentCategory> getChildrenNodeList(Long id){
 		TbContentCategoryExample example = new TbContentCategoryExample();
 		//设置查询条件
 		Criteria criteria = example.createCriteria();
 		criteria.andParentIdEqualTo(id);
 		//执行查询获取所有的子节点
 		return contentCategoryMapper.selectByExample(example);
+	}
+
+	@Override
+	public TbContentCategory getCategoryList(Long id) {
+		return contentCategoryMapper.selectByPrimaryKey(id);
+		
 	}
 }

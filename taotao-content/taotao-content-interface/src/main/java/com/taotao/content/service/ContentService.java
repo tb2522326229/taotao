@@ -36,5 +36,12 @@ public interface ContentService {
 	 * @return
 	 */
 	public TaotaoResult addContent(TbContent content);
+	
+	/**
+	 * 根据分类id返回内容集合
+	 * @param categoryId 分类id
+	 * @return
+	 */
+	public List<TbContent> getContentList(Long categoryId);
 
 }

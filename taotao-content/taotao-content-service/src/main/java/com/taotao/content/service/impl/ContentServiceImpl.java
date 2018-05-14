@@ -63,4 +63,16 @@ public class ContentServiceImpl implements ContentService {
 		return TaotaoResult.ok();
 
 	}
+
+	@Override
+	public List<TbContent> getContentList(Long categoryId) {
+		//根据cid查询内容列表
+		TbContentExample example = new TbContentExample();
+		//设置查询条件
+		Criteria criteria = example.createCriteria();
+		criteria.andCategoryIdEqualTo(categoryId);
+		//执行查询
+		List<TbContent> list = contentMapper.selectByExample(example);
+		return list;
+	}
 }
