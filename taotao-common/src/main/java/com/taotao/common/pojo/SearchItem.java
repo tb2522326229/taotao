@@ -3,8 +3,9 @@ package com.taotao.common.pojo;
 import java.io.Serializable;
 
 /**
- * 1.查询后返回的商品列表所包含的属性
- * 2.搜索时用到的商品信息（此处item不是明细，其含义是product）
+ * 添加solr索引库的搜索域
+ * 1.后台查询后返回的商品列表所包含的属性
+ * 2.后台搜索时用到的商品信息（此处item不是明细，其含义是product）
  * 3.也可以是前台搜索商品后返回的属性之一
  */
 public class SearchItem implements Serializable {
