@@ -18,6 +18,8 @@ public interface TbItemDescMapper {
 
     List<TbItemDesc> selectByExample(TbItemDescExample example);
 
+    TbItemDesc selectByPrimaryKey(Long itemId);
+    
     int updateByExampleSelective(@Param("record") TbItemDesc record, @Param("example") TbItemDescExample example);
 
     int updateByExampleWithBLOBs(@Param("record") TbItemDesc record, @Param("example") TbItemDescExample example);

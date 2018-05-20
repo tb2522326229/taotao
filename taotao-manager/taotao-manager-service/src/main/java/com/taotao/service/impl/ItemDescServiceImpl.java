@@ -23,9 +23,10 @@ public class ItemDescServiceImpl implements ItemDescService {
 		Criteria criteria = example.createCriteria();
 		criteria.andItemIdEqualTo(id);
 		List<TbItemDesc> itemDesc = itemDescMapper.selectByExampleWithBLOBs(example);
-		for (TbItemDesc tbItemDesc : itemDesc) {
-			System.out.println(tbItemDesc.getItemDesc());
-		}
 		return TaotaoResult.ok(itemDesc.get(0));
+	}
+	@Override
+	public TbItemDesc getItemDescById(Long itemId) {
+		return itemDescMapper.selectByPrimaryKey(itemId);
 	}
 }

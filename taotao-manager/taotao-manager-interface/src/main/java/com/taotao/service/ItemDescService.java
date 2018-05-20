@@ -13,5 +13,12 @@ public interface ItemDescService {
 	 * @return
 	 */
 	public TaotaoResult getItemDesc(Long id);
+	
+	/**
+	 * 根据商品id获取商品详情
+	 * @param id
+	 * @return
+	 */
+	public TbItemDesc getItemDescById(Long id);
 
 }

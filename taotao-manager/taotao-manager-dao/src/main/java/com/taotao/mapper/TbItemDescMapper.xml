@@ -103,6 +103,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_item_desc
+    where item_id = #{itemId,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByExample" parameterType="com.taotao.pojo.TbItemDescExample" >
     delete from tb_item_desc
     <if test="_parameter != null" >

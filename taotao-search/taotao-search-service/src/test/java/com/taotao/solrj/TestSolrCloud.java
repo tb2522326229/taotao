@@ -8,7 +8,7 @@ public class TestSolrCloud {
 
 	@Test
 	public void testSolrCloudAdDocument() throws Exception {
-		//创建一个CloudSolrServer对象，构造方法中需要制定zookeeper的地址列表
+		/*//创建一个CloudSolrServer对象，构造方法中需要制定zookeeper的地址列表
 		CloudSolrServer cloudSolrServer = new CloudSolrServer("192.168.25.132:2181,192.168.25.132:2182,192.168.25.132:2183");
 		//需要设置默认的Collection
 		cloudSolrServer.setDefaultCollection("mycore");
@@ -21,7 +21,7 @@ public class TestSolrCloud {
 		//把文档写入索引库
 		cloudSolrServer.add(document);
 		//提交
-		cloudSolrServer.commit();
+		cloudSolrServer.commit();*/
 		
 	}
 }
