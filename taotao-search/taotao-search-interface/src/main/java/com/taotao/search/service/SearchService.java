@@ -4,7 +4,7 @@ import com.taotao.common.pojo.SearchResult;
 
 public interface SearchService {
 	/**
-	 * 根据条件查询出商品列表并分页
+	 * 根据条件在索引库中查询出商品列表并分页
 	 * @param queryString 查询条件
 	 * @param page 当前页
 	 * @param pageSize 每页显示数量
