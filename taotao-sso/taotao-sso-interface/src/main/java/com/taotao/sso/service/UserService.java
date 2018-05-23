@@ -22,4 +22,26 @@ public interface UserService {
 	 * @return
 	 */
 	public TaotaoResult register(TbUser user);
+	
+	/**
+	 * 用户登录操作
+	 * @param username 用户名
+	 * @param password 密码（md5加密过的）
+	 * @return
+	 */
+	public TaotaoResult login(String username,String password);
+	
+	/**
+	 * 根据token查询用户信息
+	 * @param token 用户的sessionid
+	 * @return
+	 */
+	public TaotaoResult getUserByToken(String token);
+
+	/**
+	 * 安全退出
+	 * @param token用户的sessionid
+	 * @return
+	 */
+	public TaotaoResult logout(String token); 
 }
