@@ -27,6 +27,10 @@ public class TaotaoResult implements Serializable{
     public static TaotaoResult build(Integer status, String msg, Object data) {
         return new TaotaoResult(status, msg, data);
     }
+    
+    public static TaotaoResult ok(Integer status, String msg, Object data) {
+    	return new TaotaoResult(status, msg, data);
+    }
 
     public static TaotaoResult ok(Object data) {
         return new TaotaoResult(data);
@@ -42,6 +46,10 @@ public class TaotaoResult implements Serializable{
 
     public static TaotaoResult build(Integer status, String msg) {
         return new TaotaoResult(status, msg, null);
+    }
+    
+    public static TaotaoResult ok(Integer status, String msg) {
+    	return new TaotaoResult(status, msg, null);
     }
 
     public TaotaoResult(Integer status, String msg, Object data) {
