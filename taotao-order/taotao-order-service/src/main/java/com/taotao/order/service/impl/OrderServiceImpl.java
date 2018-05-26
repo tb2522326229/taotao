@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.jedis.JedisClient;
@@ -16,6 +17,7 @@ import com.taotao.order.service.OrderService;
 import com.taotao.pojo.TbOrderItem;
 import com.taotao.pojo.TbOrderShipping;
 
+@Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
