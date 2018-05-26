@@ -31,10 +31,15 @@ public class ItemController {
 		Item item = new Item(tbItem);
 		TbItemDesc itemDesc = itemDescService.getItemDescById(itemId);
 		TbItemParamItem itemParam = itemParamItemService.getParamById(itemId);
-		System.out.println("controller:" + itemParam.getParamData());
-		model.addAttribute("item", item);
-		model.addAttribute("itemDesc", itemDesc);
-		model.addAttribute("itemParam", JsonUtils.objectToJson(itemParam));
+		if(item != null){
+			model.addAttribute("item", item);
+		}
+		if(itemDesc != null){
+			model.addAttribute("itemDesc", itemDesc);
+		}
+		if(itemParam != null ){
+			model.addAttribute("itemParam", JsonUtils.objectToJson(itemParam));
+		}
 		return "item";
 	}
 }
