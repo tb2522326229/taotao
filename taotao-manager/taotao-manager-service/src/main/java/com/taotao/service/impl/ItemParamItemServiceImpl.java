@@ -53,11 +53,12 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 				jedisClient.set(ITEM_INFO + ":" + itemId  + ":PARAM", JsonUtils.objectToJson(itemParamItem));
 				//设置过期时间，提高缓存的利用率
 				jedisClient.expire(ITEM_INFO + ":" + itemId  + ":DESC", TIEM_EXPIRE);
+				return itemParamItems.get(0);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return itemParamItems.get(0);
+		return null;
 	}
 
 }

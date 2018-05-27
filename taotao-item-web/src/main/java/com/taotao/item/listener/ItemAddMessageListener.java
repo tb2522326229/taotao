@@ -50,7 +50,7 @@ public class ItemAddMessageListener implements MessageListener {
 			TbItem tbItem = itemService.getItemById(itemId);
 			Item item = new Item(tbItem);
 			TbItemDesc itemDesc = itemDescService.getItemDescById(itemId);
-			TbItemParamItem itemParamItem = itemParamItemService.getParamById(itemId);
+			//TbItemParamItem itemParamItem = itemParamItemService.getParamById(itemId);
 			//使用freemarker生成静态页面
 			Configuration configuration = freeMarkerConfigurer.getConfiguration();
 			//1.创建模板
@@ -63,7 +63,7 @@ public class ItemAddMessageListener implements MessageListener {
 			GenFreeItem data2 = new GenFreeItem();
 			data2.setItem(item);
 			data2.setTbItemDesc(itemDesc);
-			data2.setTbItemParamItem(itemParamItem);
+			//data2.setTbItemParamItem(itemParamItem);
 			//4.指定输出的目录及文件名
 			Writer out = new FileWriter(new File(HTML_OUT_PATH + strId + ".html"));
 			//5.生成静态页面

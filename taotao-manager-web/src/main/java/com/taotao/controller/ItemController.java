@@ -35,7 +35,12 @@ public class ItemController {
 	public TaotaoResult addItem(TbItem item,String desc) {
 		return itemService.addItem(item, desc);
 	}
-
+/*	@RequestMapping("/item/save")
+	@ResponseBody
+	public TaotaoResult addItem(TbItem item,String desc,String itemParams) {
+		return itemService.addItem(item, desc,itemParams);
+	}
+*/
 	@RequestMapping("/rest/item/delete")
 	@ResponseBody
 	public TaotaoResult deleteItem(@RequestParam("ids")List<Long> ids){

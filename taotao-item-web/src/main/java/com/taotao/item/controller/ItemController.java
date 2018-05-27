@@ -1,6 +1,7 @@
 package com.taotao.item.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class ItemController {
 	@Autowired
 	private ItemParamItemService itemParamItemService;
 	
-	@RequestMapping("/item/{itemId}")
+	@RequestMapping(value="/item/{itemId}",produces=MediaType.TEXT_HTML_VALUE + ";charset=utf-8")
 	public String showItem(@PathVariable long itemId ,Model model){
 		TbItem tbItem = itemService.getItemById(itemId);
 		Item item = new Item(tbItem);
