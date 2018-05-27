@@ -18,7 +18,9 @@ import com.taotao.item.GenFreeItem;
 import com.taotao.item.pojo.Item;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
+import com.taotao.pojo.TbItemParamItem;
 import com.taotao.service.ItemDescService;
+import com.taotao.service.ItemParamItemService;
 import com.taotao.service.ItemService;
 
 import freemarker.template.Configuration;
@@ -29,6 +31,8 @@ public class ItemAddMessageListener implements MessageListener {
 	private ItemService itemService;
 	@Autowired
 	private ItemDescService itemDescService;
+	@Autowired
+	private ItemParamItemService itemParamItemService;
 	@Autowired
 	private FreeMarkerConfigurer freeMarkerConfigurer;
 	@Value("${HTML_OUT_PATH}")
@@ -46,6 +50,7 @@ public class ItemAddMessageListener implements MessageListener {
 			TbItem tbItem = itemService.getItemById(itemId);
 			Item item = new Item(tbItem);
 			TbItemDesc itemDesc = itemDescService.getItemDescById(itemId);
+			TbItemParamItem itemParamItem = itemParamItemService.getParamById(itemId);
 			//使用freemarker生成静态页面
 			Configuration configuration = freeMarkerConfigurer.getConfiguration();
 			//1.创建模板
@@ -58,6 +63,7 @@ public class ItemAddMessageListener implements MessageListener {
 			GenFreeItem data2 = new GenFreeItem();
 			data2.setItem(item);
 			data2.setTbItemDesc(itemDesc);
+			data2.setTbItemParamItem(itemParamItem);
 			//4.指定输出的目录及文件名
 			Writer out = new FileWriter(new File(HTML_OUT_PATH + strId + ".html"));
 			//5.生成静态页面

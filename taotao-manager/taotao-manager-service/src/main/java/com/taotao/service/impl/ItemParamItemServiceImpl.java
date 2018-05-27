@@ -1,5 +1,7 @@
 package com.taotao.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.taotao.jedis.JedisClient;
 import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.TbItemParamItem;
+import com.taotao.pojo.TbItemParamItemExample;
+import com.taotao.pojo.TbItemParamItemExample.Criteria;
 import com.taotao.service.ItemParamItemService;
 import com.taotao.utils.JsonUtils;
 
@@ -37,16 +41,23 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		TbItemParamItem itemParamItem = paramItemMapper.selectByPrimaryKey(itemId);
-		try {
-			//把查询结果添加到缓存
-			jedisClient.set(ITEM_INFO + ":" + itemId  + ":PARAM", JsonUtils.objectToJson(itemParamItem));
-			//设置过期时间，提高缓存的利用率
-			jedisClient.expire(ITEM_INFO + ":" + itemId  + ":DESC", TIEM_EXPIRE);
-		} catch (Exception e) {
-			e.printStackTrace();
+		
+		TbItemParamItemExample example = new TbItemParamItemExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andItemIdEqualTo(itemId);
+		List<TbItemParamItem> itemParamItems = paramItemMapper.selectByExample(example);
+		if(itemParamItems != null && itemParamItems.size() > 0){
+			TbItemParamItem itemParamItem = itemParamItems.get(0);
+			try {
+				//把查询结果添加到缓存
+				jedisClient.set(ITEM_INFO + ":" + itemId  + ":PARAM", JsonUtils.objectToJson(itemParamItem));
+				//设置过期时间，提高缓存的利用率
+				jedisClient.expire(ITEM_INFO + ":" + itemId  + ":DESC", TIEM_EXPIRE);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return paramItemMapper.selectByPrimaryKey(itemId);
+		return itemParamItems.get(0);
 	}
 
 }
