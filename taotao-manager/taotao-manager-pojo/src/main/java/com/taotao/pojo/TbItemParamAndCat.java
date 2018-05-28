@@ -1,5 +1,7 @@
 package com.taotao.pojo;
-
+/**
+ * 商品规格模板
+ */
 public class TbItemParamAndCat extends TbItemParam{
 	private String itemCatName;
 
