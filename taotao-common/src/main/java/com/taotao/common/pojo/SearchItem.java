@@ -17,6 +17,13 @@ public class SearchItem implements Serializable {
 	private String image;
 	private String category_name;
 	private String item_desc;
+	private String item_param_item;
+	public String getItem_param_item() {
+		return item_param_item;
+	}
+	public void setItem_param_item(String item_param_item) {
+		this.item_param_item = item_param_item;
+	}
 	public String getId() {
 		return id;
 	}

@@ -15,7 +15,7 @@ public interface SearchItemMapper {
 	public List<SearchItem> getItemList();
 	
 	/**
-	 * 根据商品id获取商品列表
+	 * 根据商品id获取商品列表，商品分类名称，商品规格
 	 * @param itemId
 	 * @return
 	 */

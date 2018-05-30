@@ -19,53 +19,49 @@ import com.taotao.service.ItemService;
 public class ItemController {
 	@Autowired
 	private ItemService itemService;
+
 	@RequestMapping("/item/{itemId}")
 	@ResponseBody
-	public TbItem getItemById(@PathVariable Long itemId){
+	public TbItem getItemById(@PathVariable Long itemId) {
 		return itemService.getItemById(itemId);
 	}
-	
+
 	@RequestMapping("/item/list")
 	@ResponseBody
 	public EasyUIDataGridResult getItemList(Integer page, Integer rows) {
 		return itemService.getItemList(page, rows);
 	}
-	
+
 	@RequestMapping("/item/save")
 	@ResponseBody
-	public TaotaoResult addItem(TbItem item,String desc) {
-		return itemService.addItem(item, desc);
+	public TaotaoResult addItem(TbItem item, String desc, String itemParams) {
+		return itemService.addItem(item, desc, itemParams);
 	}
-/*	@RequestMapping("/item/save")
-	@ResponseBody
-	public TaotaoResult addItem(TbItem item,String desc,String itemParams) {
-		return itemService.addItem(item, desc,itemParams);
-	}
-*/
+
 	@RequestMapping("/rest/item/delete")
 	@ResponseBody
-	public TaotaoResult deleteItem(@RequestParam("ids")List<Long> ids){
+	public TaotaoResult deleteItem(@RequestParam("ids") List<Long> ids) {
 		return itemService.deleteBatch(ids);
 	}
-	
+
 	@RequestMapping("/rest/item/update")
 	@ResponseBody
-	public TaotaoResult deleteItem(TbItem item,String desc){
-		return itemService.updateItem(item,desc);
+	public TaotaoResult deleteItem(TbItem item, String desc) {
+		return itemService.updateItem(item, desc);
 	}
-	
 
 	@RequestMapping("/item/query/{itemId}")
 	@ResponseBody
-	public TaotaoResult getItemById2(Long itemId){
+	public TaotaoResult getItemById2(Long itemId) {
 		return itemService.getItemById2(itemId);
 	}
-	
+
 	@RequestMapping("/item/cat")
-	public String getItemByCid(@RequestParam("catId") Long cid,@RequestParam(defaultValue="1")Integer page,Model model){
+	public String getItemByCid(@RequestParam("catId") Long cid, @RequestParam(defaultValue = "1") Integer page,
+			Model model) {
 		TaotaoResult itemByCid = itemService.getItemByCid(cid);
-		model.addAttribute("itemList",itemByCid.getData() );
+		model.addAttribute("itemList", itemByCid.getData());
 		return "search";
 	}
-	
+
 }

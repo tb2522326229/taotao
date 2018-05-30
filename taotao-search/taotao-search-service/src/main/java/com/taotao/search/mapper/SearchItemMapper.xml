@@ -9,12 +9,14 @@
 			a.sell_point,
 			a.price,
 			a.image,
-			b. NAME category_name,
+			b.name category_name,
 			c.item_desc
+			d.param_data
 		FROM
 			tb_item a
 		LEFT JOIN tb_item_cat b ON a.cid = b.id
-		LEFT JOIN tb_item_desc c ON a.id = c.item_id
+		LEFT JOIN tb_item_desc c ON a.id = c.item_id 
+		LEFT JOIN tb_item_param_item d ON a.id = d.item_id
 		WHERE
 			a.`status` = 1
 	</select>
@@ -25,12 +27,13 @@
 			a.sell_point,
 			a.price,
 			a.image,
-			b. NAME category_name,
+			b.name category_name,
 			c.item_desc
 		FROM
 			tb_item a
 		LEFT JOIN tb_item_cat b ON a.cid = b.id
-		LEFT JOIN tb_item_desc c ON a.id = c.item_id
+		LEFT JOIN tb_item_desc c ON a.id = c.item_id 
+		LEFT JOIN tb_item_param_item d ON a.id = d.item_id
 		WHERE
 			a.`status` = 1
 		  AND

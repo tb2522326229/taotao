@@ -25,13 +25,37 @@ public class ItemController {
 	private ItemDescService itemDescService;
 	@Autowired
 	private ItemParamItemService itemParamItemService;
-	
-	@RequestMapping(value="/item/{itemId}",produces=MediaType.TEXT_HTML_VALUE + ";charset=utf-8")
-	public String showItem(@PathVariable long itemId ,Model model){
+
+	@RequestMapping(value = "/item/{itemId}", produces = MediaType.TEXT_HTML_VALUE + ";charset=utf-8")
+	public String showItem(@PathVariable long itemId, Model model) {
 		TbItem tbItem = itemService.getItemById(itemId);
 		Item item = new Item(tbItem);
 		TbItemDesc itemDesc = itemDescService.getItemDescById(itemId);
 		TbItemParamItem itemParam = itemParamItemService.getParamById(itemId);
+		if (item != null) {
+			model.addAttribute("item", item);
+		} else {
+			model.addAttribute("item", "该项暂未导入");
+		}
+		if (itemDesc != null) {
+			model.addAttribute("itemDesc", itemDesc);
+		} else {
+			model.addAttribute("itemDesc", "该项暂未导入");
+		}
+		if (itemParam != null) {
+			model.addAttribute("itemParam", JsonUtils.objectToJson(itemParam));
+		} else {
+			model.addAttribute("itemParam", "该项暂未导入");
+		}
+		return "item";
+	}
+	/**
+	 * 	@RequestMapping(value="/item/{itemId}",produces=MediaType.TEXT_HTML_VALUE + ";charset=utf-8")
+	public String showItem(@PathVariable long itemId ,Model model){
+		TbItem tbItem = itemService.getItemById(itemId);
+		Item item = new Item(tbItem);
+		TbItemDesc itemDesc = itemDescService.getItemDescById(itemId);
+		String itemParam = itemParamItemService.getParamById(itemId);
 		if(item != null){
 			model.addAttribute("item", item);
 		}
@@ -39,8 +63,9 @@ public class ItemController {
 			model.addAttribute("itemDesc", itemDesc);
 		}
 		if(itemParam != null ){
-			model.addAttribute("itemParam", JsonUtils.objectToJson(itemParam));
+			model.addAttribute("itemParam", itemParam);
 		}
 		return "item";
 	}
+	 */
 }
