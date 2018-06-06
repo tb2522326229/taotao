@@ -1,9 +1,12 @@
 package com.taotao.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.taotao.common.pojo.EasyUIDataGridResult;
@@ -37,6 +40,12 @@ public class ItemParamController {
 	@ResponseBody
 	public TaotaoResult queryItemParam(@PathVariable long catId) {
 		return itemParamService.queryItemParam(catId);
+	}
+	
+	@RequestMapping("/item/param/delete")
+	@ResponseBody
+	public TaotaoResult batchDelete(@RequestParam("ids")List<Long> ids){
+		return itemParamService.deleteBatch(ids);
 	}
 
 }

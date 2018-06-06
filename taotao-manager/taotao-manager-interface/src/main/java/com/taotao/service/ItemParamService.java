@@ -1,5 +1,7 @@
 package com.taotao.service;
 
+import java.util.List;
+
 import com.taotao.common.pojo.EasyUIDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.pojo.TbItemParam;
@@ -27,5 +29,12 @@ public interface ItemParamService {
 	 * @return
 	 */
 	public TaotaoResult queryItemParam(long catId);
+
+	/**
+	 * 根据模板id删除对应的模板信息
+	 * @param ids
+	 * @return
+	 */
+	public TaotaoResult deleteBatch(List<Long> ids);
 
 }

@@ -112,7 +112,7 @@ var TT = TAOTAO = {
     		}else{
     			_ele.after("<span style='margin-left:10px;'></span>");
     		}
-    		_ele.unbind('click').click(function(){
+    		_ele.unbind('click').click(function(){// 给每一个分类节点都绑定一个事件
     			$("<div>").css({padding:"5px"}).html("<ul>")
     			.window({
     				width:'500',

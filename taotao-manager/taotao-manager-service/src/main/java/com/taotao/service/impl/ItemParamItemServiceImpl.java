@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.jedis.JedisClient;
 import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.TbItemParamItem;
@@ -34,7 +35,7 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 	public TbItemParamItem getParamById(Long itemId) {
 		// 查询数据库之前先查询缓存
 		try {
-			String json = jedisClient.get(ITEM_INFO + ":" + itemId + ":PARAM");
+			String json = jedisClient.get(ITEM_INFO + ":" + itemId + ":PARAMITEM");
 			if (StringUtils.isNotBlank(json)) {
 				// 把json数据转换成pojo
 				TbItemParamItem itemParamItem = JsonUtils.jsonToPojo(json, TbItemParamItem.class);
@@ -52,7 +53,7 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 			TbItemParamItem itemParamItem = itemParamItems.get(0);
 			try {
 				// 把查询结果添加到缓存
-				jedisClient.set(ITEM_INFO + ":" + itemId + ":PARAM", JsonUtils.objectToJson(itemParamItem));
+				jedisClient.set(ITEM_INFO + ":" + itemId + ":PARAMITEM", JsonUtils.objectToJson(itemParamItem));
 				// 设置过期时间，提高缓存的利用率
 				jedisClient.expire(ITEM_INFO + ":" + itemId + ":DESC", TIEM_EXPIRE);
 				return itemParamItems.get(0);
@@ -63,10 +64,16 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 		return null;
 	}
 
+	@Override
+	public TaotaoResult deleteBatch(List<Long> ids) {
+		paramItemMapper.deleteBatch(ids);
+		return TaotaoResult.ok();
+	}
+
 	/*public String getParamById(Long itemId) {
 	//查询数据库之前先查询缓存
 	try {
-		String json = jedisClient.get(ITEM_INFO + ":" + itemId  + ":PARAM");
+		String json = jedisClient.get(ITEM_INFO + ":" + itemId  + ":PARAMITEM");
 		if (StringUtils.isNotBlank(json)) {
 			// 把json数据转换成pojo
 			TbItemParamItem itemParamItem = JsonUtils.jsonToPojo(json, TbItemParamItem.class);
@@ -107,9 +114,9 @@ public class ItemParamItemServiceImpl implements ItemParamItemService {
 	sb.append("</table>");
 	try {
 		//把查询结果添加到缓存
-		jedisClient.set(ITEM_INFO + ":" + itemId  + ":PARAM", JsonUtils.objectToJson(itemParamItem));
+		jedisClient.set(ITEM_INFO + ":" + itemId  + ":PARAMITEM", JsonUtils.objectToJson(itemParamItem));
 		//设置过期时间，提高缓存的利用率
-		jedisClient.expire(ITEM_INFO + ":" + itemId  + ":PARAM", TIEM_EXPIRE);
+		jedisClient.expire(ITEM_INFO + ":" + itemId  + ":PARAMITEM", TIEM_EXPIRE);
 		return sb.toString();
 	} catch (Exception e) {
 		e.printStackTrace();

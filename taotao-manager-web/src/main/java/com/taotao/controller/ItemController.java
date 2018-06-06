@@ -46,7 +46,7 @@ public class ItemController {
 
 	@RequestMapping("/rest/item/update")
 	@ResponseBody
-	public TaotaoResult deleteItem(TbItem item, String desc) {
+	public TaotaoResult updateItem(TbItem item, String desc) {
 		return itemService.updateItem(item, desc);
 	}
 

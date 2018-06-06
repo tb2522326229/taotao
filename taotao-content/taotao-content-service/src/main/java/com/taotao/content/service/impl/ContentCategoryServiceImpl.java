@@ -64,7 +64,6 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		// c)向tb_content_category表中插入数据
 		contentCategoryMapper.insert(tbContentCategory);
 		TbContentCategory parentNode = contentCategoryMapper.selectByPrimaryKey(parentId);
-		System.out.println(parentNode.getName());
 		if(!parentNode.getIsParent()){
 			parentNode.setIsParent(true);
 			//更新父节点
@@ -97,7 +96,8 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 			}
 		}
 		
-		// 判断被删除的父节点下是否还有子节点
+		// 判断被删除节点的父节点下是否还有子节点
+		System.out.println(getChildrenNodeList(tbContentCategory.getParentId()).size());
 		if(getChildrenNodeList(tbContentCategory.getParentId()).size() == 1){
 			// 查询该节点对应的父节点
 			TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(tbContentCategory.getParentId());

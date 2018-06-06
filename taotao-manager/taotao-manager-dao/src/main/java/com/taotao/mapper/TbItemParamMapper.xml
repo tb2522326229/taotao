@@ -122,6 +122,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteBatch" parameterType="list">
+  	delete from tb_item_param
+  	where id in
+  	<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+      	#{item}
+	</foreach>
+  </delete>
   <insert id="insert" parameterType="com.taotao.pojo.TbItemParam" >
     insert into tb_item_param (id, item_cat_id, created, 
       updated, param_data)
