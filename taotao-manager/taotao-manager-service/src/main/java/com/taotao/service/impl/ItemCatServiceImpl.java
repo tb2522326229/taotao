@@ -23,74 +23,76 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Override
 	public List<EasyUITreeNode> getItemCatList(Long parentId) {
-		//根据父节点id查询子节点列表
+		// 根据父节点id查询子节点列表
 		TbItemCatExample example = new TbItemCatExample();
-		//设置查询条件
+		// 设置查询条件
 		Criteria criteria = example.createCriteria();
-		//设置parentid
+		// 设置parentid
 		criteria.andParentIdEqualTo(parentId);
-		//执行查询
+		// 执行查询
 		List<TbItemCat> list = itemCatMapper.selectByExample(example);
 		List<EasyUITreeNode> resultList = new ArrayList<>();
 		for (TbItemCat tbItemCat : list) {
 			EasyUITreeNode node = new EasyUITreeNode();
 			node.setId(tbItemCat.getId());
 			node.setText(tbItemCat.getName());
-			//如果节点下有子节点“closed”，如果没有子节点“open”
-			node.setState(tbItemCat.getIsParent()?"closed":"open");
-			//添加到节点列表
+			// 如果节点下有子节点“closed”，如果没有子节点“open”
+			node.setState(tbItemCat.getIsParent() ? "closed" : "open");
+			// 添加到节点列表
 			resultList.add(node);
 		}
 		return resultList;
 	}
-	
+
 	@Override
 	public CatResult getItemCatList2() {
 		CatResult catResult = new CatResult();
-		//查询分类列表
+		// 查询分类列表
 		catResult.setData(getCatList(0));
 		return catResult;
 
 	}
-	
+
 	/**
 	 * 递归的查询出所有的商品分类列表
+	 * 
 	 * @param parentId
 	 * @return
 	 */
-	private List<?> getCatList(long parentId){
-		//根据父节点id查询子节点列表
+	private List<?> getCatList(long parentId) {
+		// 根据父节点id查询子节点列表
 		TbItemCatExample example = new TbItemCatExample();
-		//设置查询条件
+		// 设置查询条件
 		Criteria criteria = example.createCriteria();
-		//设置parentid
+		// 设置parentid
 		criteria.andParentIdEqualTo(parentId);
-		//执行查询
+		// 执行查询
 		List<TbItemCat> list = itemCatMapper.selectByExample(example);
-		//返回值list
+		// 返回值list
 		List resultList = new ArrayList<>();
-		//向list中添加节点
+		// 向list中添加节点
 		int count = 0;
 		for (TbItemCat tbItemCat : list) {
-			//判断是否为父节点
+			// 判断是否为父节点
 			if (tbItemCat.getIsParent()) {
 				CatNode catNode = new CatNode();
 				if (parentId == 0) {
-					catNode.setName("<a href='/item/cat?catId="+tbItemCat.getId()+"'>"+tbItemCat.getName()+"</a>");
+					catNode.setName(
+							"<a href='/item/cat?catId=" + tbItemCat.getId() + "'>" + tbItemCat.getName() + "</a>");
 				} else {
 					catNode.setName(tbItemCat.getName());
 				}
-				catNode.setUrl("/item/cat?catId="+tbItemCat.getId()+"");
+				catNode.setUrl("/item/cat?catId=" + tbItemCat.getId() + "");
 				catNode.setItem(getCatList(tbItemCat.getId()));
 				resultList.add(catNode);
 				count++;
-				//第一层只取14条记录
-				if (parentId == 0 && count >=14) {
+				// 第一层只取14条记录
+				if (parentId == 0 && count >= 14) {
 					break;
 				}
-			//如果是叶子节点
+				// 如果是叶子节点
 			} else {
-				resultList.add("/item/cat?catId="+tbItemCat.getId()+"|" + tbItemCat.getName());
+				resultList.add("/item/cat?catId=" + tbItemCat.getId() + "|" + tbItemCat.getName());
 			}
 		}
 		return resultList;
